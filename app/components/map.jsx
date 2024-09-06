@@ -1,41 +1,65 @@
 'use client';
-import dynamic from 'next/dynamic';
-
-const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
-const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
-const ImageOverlay = dynamic(() => import('react-leaflet').then((mod) => mod.ImageOverlay), { ssr: false });
 
 import { Montserrat } from 'next/font/google';
 import 'leaflet/dist/leaflet.css';
-import * as L from 'leaflet';
-import { useEffect, useState } from 'react';
-import { mapData } from '../constants/mapData';
+import { MapContainer, ImageOverlay, Marker } from 'react-leaflet';
+import L, { icon } from 'leaflet';
+import { Suspense, useEffect, useState } from 'react';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
+const cyclopsIcon = new L.Icon({ iconUrl: '/assets/Cyclops.webp', iconSize: [48, 48] });
+const khazraIcon = new L.Icon({ iconUrl: '/assets/Khazra.webp', iconSize: [48, 48] });
+
+let mapData = [
+  {
+    name: 'Castle Closeau V1',
+    url: '/assets/Castle_Closeau_01.png',
+    bosses: [
+      {
+        name: 'Cyclops',
+        position: [355, 406],
+        icon: cyclopsIcon,
+      },
+    ],
+    elites: [{ name: 'Khazra' }],
+  },
+  {
+    name: 'Castle Closeau V2',
+    url: '/assets/Castle_Closeau_02.png',
+    bosses: [
+      {
+        name: 'Cyclops',
+        position: [50, 50],
+      },
+    ],
+    elites: [{ name: 'Khazra' }],
+  },
+  {
+    name: 'Castle Closeau V3',
+    url: '/assets/Castle_Closeau_03.png',
+    bosses: [
+      {
+        name: 'Khazra',
+        position: [150, 150],
+        icon: khazraIcon,
+      },
+    ],
+    elites: [{ name: 'Khazra' }],
+  },
+];
+
 const Map = () => {
   const [activeMap, setActiveMap] = useState(mapData[0]);
-  const [isMapReady, setIsMapReady] = useState(false);
+
   const bounds = [
     [0, 0],
     [900, 900],
   ];
 
-  useEffect(() => {
-    setIsMapReady(true);
-  }, []);
-
   const handleMapChange = (newMap) => {
-    if (isMapReady) {
-      setActiveMap(newMap);
-    }
+    setActiveMap(newMap);
   };
-
-  if (!isMapReady) {
-    return <div>Loading map...</div>;
-  }
 
   return (
     <>
@@ -67,10 +91,13 @@ const Map = () => {
           </div>
         </div>
       </div>
-      <MapContainer center={[450, 450]} zoom={0} minZoom={0} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.Simple} className="w-screen h-screen z-10 !bg-neutral-900">
-        <ImageOverlay url={activeMap.url} bounds={bounds} />
-        {activeMap.bosses ? activeMap.bosses.filter((boss) => boss.name === 'Cyclops').map((boss, i) => <Marker key={i} position={boss.position} icon={boss.icon}></Marker>) : <></>}
-      </MapContainer>
+      <Suspense fallback={<div>Loading map...</div>}>
+        <MapContainer center={[450, 450]} zoom={0} minZoom={0} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.Simple} className="w-screen h-screen z-10 !bg-neutral-900">
+          <ImageOverlay url={activeMap.url} bounds={bounds} />
+          {activeMap.bosses ? activeMap.bosses.filter((boss) => boss.name === 'Cyclops').map((boss, i) => <Marker key={i} position={boss.position} icon={boss.icon}></Marker>) : <></>}
+          {activeMap.bosses ? activeMap.bosses.filter((boss) => boss.name === 'Khazra').map((boss, i) => <Marker key={i} position={boss.position} icon={boss.icon}></Marker>) : <></>}
+        </MapContainer>
+      </Suspense>
     </>
   );
 };
