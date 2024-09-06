@@ -1,9 +1,10 @@
-import { MapContainer } from "react-leaflet";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import('./components/map'), {ssr: false})
 
 export default function Home() {
   return (
-    <main className="bg-neutral-700 min-h-dvh">
-      123
+    <main className="bg-neutral-700">
+      <Map></Map>
     </main>
   );
 }

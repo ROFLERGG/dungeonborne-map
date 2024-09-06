@@ -1,7 +1,7 @@
-import { Montserrat } from "next/font/google";
+import { Oldenburg } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+const oldenburg = Oldenburg({ subsets: ["latin"], weight: '400' });
 
 export const metadata = {
   title: "Interactive map for Dungeonborne",
@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={oldenburg.className}>{children}</body>
     </html>
   );
 }
