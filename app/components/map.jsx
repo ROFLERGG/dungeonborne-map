@@ -1,16 +1,13 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 import { Suspense, useState } from 'react';
-const DynamicMap = dynamic(() => import('./map-component'), { ssr: false });
+import dynamic from 'next/dynamic';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-const cyclopsIcon = new L.Icon({ iconUrl: '/assets/Cyclops.webp', iconSize: [48, 48] });
-const khazraIcon = new L.Icon({ iconUrl: '/assets/Khazra.webp', iconSize: [48, 48] });
+const DynamicMap = dynamic(() => import('./dynamic-map'), { ssr: false });
 
 let mapData = [
   {
@@ -20,7 +17,6 @@ let mapData = [
       {
         name: 'Cyclops',
         position: [355, 406],
-        icon: cyclopsIcon,
       },
     ],
     elites: [{ name: 'Khazra' }],
@@ -43,7 +39,6 @@ let mapData = [
       {
         name: 'Khazra',
         position: [150, 150],
-        icon: khazraIcon,
       },
     ],
     elites: [{ name: 'Khazra' }],
