@@ -17,9 +17,16 @@ let mapData = [
       {
         name: 'Cyclops',
         position: [355, 406],
+        icon: '/assets/Cyclops.webp',
       },
     ],
-    elites: [{ name: 'Khazra' }],
+    elites: [
+      {
+        name: 'Khazra',
+        position: [256, 768],
+        icon: '/assets/Khazra.webp',
+      },
+    ],
   },
   {
     name: 'Castle Closeau V2',
@@ -28,20 +35,28 @@ let mapData = [
       {
         name: 'Cyclops',
         position: [50, 50],
+        icon: '/assets/Cyclops.webp',
       },
     ],
-    elites: [{ name: 'Khazra' }],
+    elites: [
+      {
+        name: 'Khazra',
+        position: [245, 300],
+        icon: '/assets/Cyclops.webp',
+      },
+    ],
   },
   {
     name: 'Castle Closeau V3',
     url: '/assets/Castle_Closeau_03.png',
-    bosses: [
+    bosses: [{}],
+    elites: [
       {
         name: 'Khazra',
-        position: [150, 150],
+        position: [550, 800],
+        icon: '/assets/Khazra.webp',
       },
     ],
-    elites: [{ name: 'Khazra' }],
   },
 ];
 
