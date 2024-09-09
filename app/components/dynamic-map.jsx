@@ -1,7 +1,7 @@
 import { ImageOverlay, MapContainer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const createIcon = (iconUrl) =>
   new L.Icon({
@@ -19,11 +19,11 @@ const MarkerWithHoverPopup = ({ position, icon, name }) => {
     }
   };
 
-  // const handleMouseOut = () => {
-  //   if (markerRef.current && popupRef.current) {
-  //     markerRef.current.closePopup();
-  //   }
-  // };
+  const handleMouseOut = () => {
+    if (markerRef.current && popupRef.current) {
+      markerRef.current.closePopup();
+    }
+  };
 
   return (
     <Marker
@@ -32,12 +32,10 @@ const MarkerWithHoverPopup = ({ position, icon, name }) => {
       icon={icon}
       eventHandlers={{
         mouseover: handleMouseOver,
-        // mouseout: handleMouseOut,
+        mouseout: handleMouseOut,
       }}
     >
-      <Popup ref={popupRef} className="">
-        {name}
-      </Popup>
+      <Popup ref={popupRef}>{name}</Popup>
     </Marker>
   );
 };
