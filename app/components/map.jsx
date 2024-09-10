@@ -27,6 +27,13 @@ let mapData = [
         icon: '/assets/Khazra.webp',
       },
     ],
+    portals: [
+      {
+        name: 'Blue static portal',
+        position: [500, 400],
+        icon: '/assets/blue-portal.webp',
+      },
+    ],
   },
   {
     name: 'Castle Closeau V2',
@@ -35,13 +42,6 @@ let mapData = [
       {
         name: 'Cyclops',
         position: [50, 50],
-        icon: '/assets/Cyclops.webp',
-      },
-    ],
-    elites: [
-      {
-        name: 'Khazra',
-        position: [245, 300],
         icon: '/assets/Cyclops.webp',
       },
     ],
