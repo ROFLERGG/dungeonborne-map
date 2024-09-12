@@ -38,10 +38,11 @@ let mapData = [
   {
     name: 'Castle Closeau V2',
     url: '/assets/Castle_Closeau_02.png',
-    bosses: [
+
+    elites: [
       {
-        name: 'Cyclops',
-        position: [50, 50],
+        name: 'Khazra',
+        position: [245, 300],
         icon: '/assets/Cyclops.webp',
       },
     ],
@@ -62,19 +63,31 @@ let mapData = [
 
 const Map = () => {
   const [activeMap, setActiveMap] = useState(mapData[0]);
+  const [visibleLayers, setVisibleLayers] = useState({
+    bosses: true,
+    elites: true,
+    portals: true,
+  });
 
   const handleMapChange = (newMap) => {
     setActiveMap(newMap);
   };
 
+  const toggleLayerVisibility = (layer) => {
+    setVisibleLayers((prev) => ({
+      ...prev,
+      [layer]: !prev[layer],
+    }));
+  };
+
   return (
     <>
-      <div className="max-w-[400px] absolute z-20 right-0 h-full flex flex-col bg-[#1f2022] text-neutral-50">
+      <div className="max-w-[400px] absolute z-20 right-0 h-full flex flex-col bg-neutral-900 text-neutral-50">
         <div className="flex flex-col space-y-6">
           <p className={`${montserrat.className} text-neutral-400 p-4`}>Interactive map for Dungeonborne was created by gamer for gamers</p>
           <div className="flex flex-col">
             <div className="flex flex-col space-y-3 p-4">
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap text-neutral-50">
                 {mapData.map((map) => (
                   <button key={map.name} onClick={() => handleMapChange(map)} className={`text-center max-w-[150px] p-2 hover:bg-neutral-50 hover:bg-opacity-10 duration-150 ease-in-out ${activeMap === map ? 'bg-neutral-50 bg-opacity-10 border-b-2 border-b-[#f2c46d]' : 'border-b-2 border-b-transparent'}`}>
                     <span>{map.name}</span>
@@ -83,22 +96,25 @@ const Map = () => {
               </div>
             </div>
             {/* резделитель */}
-            <div className="h-px w-full bg-neutral-500"></div>
+            <div className="h-px w-full bg-neutral-800"></div>
             <div className="flex flex-col space-y-3 p-4">
               <h2 className="text-[#d5a860]">Bosses</h2>
               <div className="flex flex-wrap">
-                {/* {mapData.map((map) => (
-                  <button onClick={() => setActiveMap(map)} className={`flex flex-col items-center p-2 hover:bg-neutral-50 hover:bg-opacity-10 duration-150 ease-in-out ${activeMap === map ? 'bg-neutral-50 bg-opacity-10 border-b-2 border-b-[#f2c46d]' : 'border-b-2 border-b-transparent'}`}>
-                    Khazra
-                  </button>
-                ))} */}
+                {['bosses'].map((layer) => (
+                  <div key={layer} className="flex space-x-3">
+                    <input type="checkbox" id={layer} checked={visibleLayers[layer]} onChange={() => toggleLayerVisibility(layer)} />
+                    <label htmlFor={layer} className="capitalize">
+                      {layer}
+                    </label>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
       <Suspense fallback={<div>Loading map...</div>}>
-        <DynamicMap activeMap={activeMap} />
+        <DynamicMap activeMap={activeMap} visibleLayers={visibleLayers} />
       </Suspense>
     </>
   );

@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer {
+  .leaflet-popup-content-wrapper {
+    @apply !bg-neutral-800;
+  }
+  .leaflet-popup-tip {
+    @apply !bg-neutral-800;
+  }
+  .leaflet-popup-content {
+    @apply !m-4 text-neutral-50;
+  }
+}
