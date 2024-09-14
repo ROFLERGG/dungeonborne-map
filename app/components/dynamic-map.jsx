@@ -3,7 +3,7 @@
 import { ImageOverlay, MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L, { map } from 'leaflet';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Oldenburg } from 'next/font/google';
 
 const oldenburg = Oldenburg({ subsets: ['latin'], weight: '400' });

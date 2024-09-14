@@ -2,7 +2,7 @@
 
 import { Montserrat } from 'next/font/google';
 import 'leaflet/dist/leaflet.css';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -35,50 +35,70 @@ let mapData = [
       },
     ],
   },
-  {
-    name: 'Castle Closeau V2',
-    url: '/assets/Castle_Closeau_02.png',
-
-    elites: [
-      {
-        name: 'Khazra',
-        position: [245, 300],
-        icon: '/assets/Cyclops.webp',
-      },
-    ],
-  },
-  {
-    name: 'Castle Closeau V3',
-    url: '/assets/Castle_Closeau_03.png',
-    bosses: [{}],
-    elites: [
-      {
-        name: 'Khazra',
-        position: [550, 800],
-        icon: '/assets/Khazra.webp',
-      },
-    ],
-  },
+  // {
+  //   name: 'Castle Closeau V2',
+  //   url: '/assets/Castle_Closeau_02.png',
+  //   bosses: [
+  //     {
+  //       name: 'Cyclops',
+  //       position: [355, 406],
+  //       icon: '/assets/Cyclops.webp',
+  //     },
+  //   ],
+  //   elites: [
+  //     {
+  //       name: 'Khazra',
+  //       position: [245, 300],
+  //       icon: '/assets/Khazra.webp',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Castle Closeau V3',
+  //   url: '/assets/Castle_Closeau_03.png',
+  //   bosses: [{}],
+  //   elites: [
+  //     {
+  //       name: 'Khazra',
+  //       position: [550, 800],
+  //       icon: '/assets/Khazra.webp',
+  //     },
+  //   ],
+  // },
 ];
+
+const initialVisibleLayers = {
+  bosses: true,
+  elites: true,
+  portals: true,
+};
+
+const maps = ['Castle Closeau'];
 
 const Map = () => {
   const [activeMap, setActiveMap] = useState(mapData[0]);
-  const [visibleLayers, setVisibleLayers] = useState({
-    bosses: true,
-    elites: true,
-    portals: true,
-  });
+  const [visibleLayers, setVisibleLayers] = useState(initialVisibleLayers);
 
   const handleMapChange = (newMap) => {
     setActiveMap(newMap);
   };
 
   const toggleLayerVisibility = (layer) => {
-    setVisibleLayers((prev) => ({
-      ...prev,
-      [layer]: !prev[layer],
-    }));
+    // setVisibleLayers((prev) => ({
+    //   ...prev,
+    //   [layer]: !prev[layer],
+    // }));
+
+    setVisibleLayers((prev) => {
+      prev[layer] = !prev[layer];
+      console.log(prev);
+      return { ...prev };
+    });
   };
+
+  useEffect(() => {
+    setVisibleLayers({ ...initialVisibleLayers });
+  }, [activeMap.url]);
 
   return (
     <>
