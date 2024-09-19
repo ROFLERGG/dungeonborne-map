@@ -1,8 +1,8 @@
 'use client';
 
-import { ImageOverlay, MapContainer, Marker, Popup, useMap } from 'react-leaflet';
+import { ImageOverlay, MapContainer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L, { map } from 'leaflet';
+import L from 'leaflet';
 import React from 'react';
 import { Oldenburg } from 'next/font/google';
 
@@ -14,43 +14,20 @@ const createIcon = (iconUrl, size = [x, y]) =>
     iconSize: size,
   });
 
-const MarkerWithHoverPopup = ({ position, icon, name }) => {
-  // const markerRef = useRef(null);
-  // const popupRef = useRef(null);
-
-  // const handleMouseOver = () => {
-  //   if (markerRef.current && popupRef.current) {
-  //     markerRef.current.openPopup();
-  //   }
-  // };
-
-  // const handleMouseOut = () => {
-  //   if (markerRef.current && popupRef.current) {
-  //     markerRef.current.closePopup();
-  //   }
-  // };
-
+const MarkerWithHoverPopup = ({ position, icon, name, description }) => {
   return (
-    <Marker
-      // ref={markerRef}
-      position={position}
-      icon={icon}
-      // eventHandlers={{
-      //   mouseover: handleMouseOver,
-      //   mouseout: handleMouseOut,
-      // }}
-    >
+    <Marker position={position} icon={icon}>
       <Popup closeButton={false}>
-        <div className="flex flex-col space-y-3">
-          <span className={oldenburg.className}>{name}</span>
-          {/* <div className="w-5 h-5 bg-neutral-700"></div> */}
+        <div className={`flex flex-col !space-y-2 ${oldenburg.className}`}>
+          <p className="!my-0 !text-neutral-50">{name}</p>
+          {description && <p className="!my-0 !text-neutral-300 !text-xs">{description}</p>}
         </div>
       </Popup>
     </Marker>
   );
 };
 
-const Map = ({ activeMap, visibleLayers }) => {
+const Map = ({ activeLocation, visibleLayers }) => {
   const bounds = [
     [0, 0],
     [900, 900],
@@ -58,7 +35,7 @@ const Map = ({ activeMap, visibleLayers }) => {
 
   return (
     <MapContainer center={[450, 450]} zoom={0} minZoom={0} maxZoom={2} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.Simple} className="w-screen h-screen z-10 !bg-neutral-800">
-      <ImageOverlay url={activeMap.url} bounds={bounds} />
+      <ImageOverlay url={activeLocation.url} bounds={bounds} />
       {/* {[...(activeMap.bosses || []), ...(activeMap.elites || [])]
         .filter((enemy) => enemy.icon)
         ?.map((enemy, i) => {
@@ -69,9 +46,9 @@ const Map = ({ activeMap, visibleLayers }) => {
         ?.map((portal, i) => {
           return <MarkerWithHoverPopup key={i} position={portal.position} icon={createIcon(portal.icon, [28, 38])} name={portal.name} />;
         })} */}
-      {visibleLayers.bosses && activeMap.bosses?.filter((boss) => boss.icon)?.map((boss, i) => <MarkerWithHoverPopup key={i} position={boss.position} icon={createIcon(boss.icon, [48, 48])} name={boss.name} />)}
-      {visibleLayers.elites && activeMap.elites?.filter((elite) => elite.icon)?.map((elite, i) => <MarkerWithHoverPopup key={i} position={elite.position} icon={createIcon(elite.icon, [48, 48])} name={elite.name} />)}
-      {visibleLayers.portals && activeMap.portals?.filter((portal) => portal.icon)?.map((portal, i) => <MarkerWithHoverPopup key={i} position={portal.position} icon={createIcon(portal.icon, [28, 38])} name={portal.name} />)}
+      {visibleLayers.bosses && activeLocation.bosses?.filter((boss) => boss.icon)?.map((boss, i) => visibleLayers[boss.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={boss.position} icon={createIcon(boss.icon, [48, 48])} name={boss.name} description={boss.description} />)}
+      {visibleLayers.elites && activeLocation.elites?.filter((elite) => elite.icon)?.map((elite, i) => visibleLayers[elite.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={elite.position} icon={createIcon(elite.icon, [48, 48])} name={elite.name} description={elite.description} />)}
+      {visibleLayers.portals && activeLocation.portals?.filter((portal) => portal.icon)?.map((portal, i) => <MarkerWithHoverPopup key={i} position={portal.position} icon={createIcon(portal.icon, [28, 38])} name={portal.name} description={portal.description} />)}
     </MapContainer>
   );
 };
