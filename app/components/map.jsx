@@ -253,7 +253,7 @@ const initialVisibleLayers = {
 };
 
 const Map = () => {
-  const [activeMap, setActiveMap] = useState(mapData[1]);
+  const [activeMap, setActiveMap] = useState(mapData[0]);
   const [visibleLayers, setVisibleLayers] = useState(initialVisibleLayers);
 
   const handleMapChange = (newMap) => {
