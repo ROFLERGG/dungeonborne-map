@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import { Oldenburg } from "next/font/google";
 import "./globals.css";
 
@@ -11,7 +12,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={oldenburg.className}>{children}</body>
+      <body className={oldenburg.className}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
