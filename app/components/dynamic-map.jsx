@@ -27,7 +27,7 @@ const MarkerWithHoverPopup = ({ position, icon, name, description }) => {
   );
 };
 
-const Map = ({ activeLocation, visibleLayers }) => {
+const Map = ({ activeMap, visibleLayers }) => {
   const bounds = [
     [0, 0],
     [900, 900],
@@ -35,20 +35,10 @@ const Map = ({ activeLocation, visibleLayers }) => {
 
   return (
     <MapContainer center={[450, 450]} zoom={0} minZoom={0} maxZoom={2} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.Simple} className="w-screen h-screen z-10 !bg-neutral-800">
-      <ImageOverlay url={activeLocation.url} bounds={bounds} />
-      {/* {[...(activeMap.bosses || []), ...(activeMap.elites || [])]
-        .filter((enemy) => enemy.icon)
-        ?.map((enemy, i) => {
-          return <MarkerWithHoverPopup key={i} position={enemy.position} icon={createIcon(enemy.icon, [48, 48])} name={enemy.name} />;
-        })}
-      {[...(activeMap.portals || [])]
-        .filter((portal) => portal.icon)
-        ?.map((portal, i) => {
-          return <MarkerWithHoverPopup key={i} position={portal.position} icon={createIcon(portal.icon, [28, 38])} name={portal.name} />;
-        })} */}
-      {visibleLayers.bosses && activeLocation.bosses?.filter((boss) => boss.icon)?.map((boss, i) => visibleLayers[boss.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={boss.position} icon={createIcon(boss.icon, [48, 48])} name={boss.name} description={boss.description} />)}
-      {visibleLayers.elites && activeLocation.elites?.filter((elite) => elite.icon)?.map((elite, i) => visibleLayers[elite.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={elite.position} icon={createIcon(elite.icon, [48, 48])} name={elite.name} description={elite.description} />)}
-      {visibleLayers.portals && activeLocation.portals?.filter((portal) => portal.icon)?.map((portal, i) => <MarkerWithHoverPopup key={i} position={portal.position} icon={createIcon(portal.icon, [28, 38])} name={portal.name} description={portal.description} />)}
+      <ImageOverlay url={activeMap.url} bounds={bounds} />
+      {visibleLayers.bosses && activeMap.bosses?.filter((boss) => boss.icon)?.map((boss, i) => visibleLayers[boss.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={boss.position} icon={createIcon(boss.icon, [48, 48])} name={boss.name} description={boss.description} />)}
+      {visibleLayers.elites && activeMap.elites?.filter((elite) => elite.icon)?.map((elite, i) => visibleLayers[elite.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={elite.position} icon={createIcon(elite.icon, [48, 48])} name={elite.name} description={elite.description} />)}
+      {visibleLayers.portals && activeMap.portals?.filter((portal) => portal.icon)?.map((portal, i) => visibleLayers[portal.type] && <MarkerWithHoverPopup key={i} position={portal.position} icon={createIcon(portal.icon, [28, 38])} name={portal.name} description={portal.description} />)}
     </MapContainer>
   );
 };

@@ -10,180 +10,229 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 const DynamicMap = dynamic(() => import('./dynamic-map'), { ssr: false });
 
 let mapData = [
+  // maps
   {
     name: 'Castle Closeau',
-    variant: [
+    url: '/assets/Castle_Closeau_01.png',
+    bosses: [
       {
-        name: 'V1',
-        url: '/assets/Castle_Closeau_01.png',
-        bosses: [
-          {
-            name: 'Cyclops',
-            position: [355, 406],
-            icon: '/assets/Cyclops.webp',
-          },
-        ],
-        elites: [
-          {
-            name: 'Headsman',
-            position: [700, 350],
-            icon: '/assets/Headsman.webp',
-          },
-          {
-            name: 'Headsman',
-            position: [570, 407],
-            description: 'Spawns in the center of the room opposite the throne',
-            icon: '/assets/Headsman.webp',
-          },
-          {
-            name: 'Headsman',
-            position: [440, 260],
-            description: 'Spawns in room from yard side or in corridor',
-            icon: '/assets/Headsman.webp',
-          },
-          {
-            name: 'Headsman',
-            position: [172, 230],
-            icon: '/assets/Headsman.webp',
-          },
-          {
-            name: 'Headsman',
-            position: [172, 450],
-            icon: '/assets/Headsman.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [815, 290],
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [75, 420],
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [283, 550],
-            description: 'Spawns near the fountain',
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [500, 515],
-            description: 'Possible spawn one of bosses on ruins',
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [767, 520],
-            description: 'Possible boss spawn near a tree in the middle of the yard',
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [510, 175],
-            description: 'Possible to spawn right before players spawn.',
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Werewolf',
-            position: [172, 330],
-            icon: '/assets/Werewolf.webp',
-          },
-          {
-            name: 'Khazra',
-            position: [480, 525],
-            description: 'Possible spawn one of bosses on ruins',
-            icon: '/assets/Khazra.webp',
-          },
-          {
-            name: 'Reaper',
-            position: [785, 290],
-            icon: '/assets/Reaper.webp',
-          },
-        ],
-        portals: [
-          {
-            name: 'Blue static portal',
-            position: [668, 407],
-            icon: '/assets/blue-portal.webp',
-          },
-          {
-            name: 'Blue static portal',
-            position: [355, 215],
-            icon: '/assets/blue-portal.webp',
-          },
-          {
-            name: 'Blue static portal',
-            position: [235, 268],
-            icon: '/assets/blue-portal.webp',
-          },
-          {
-            name: 'Blue static portal',
-            position: [495, 383],
-            icon: '/assets/blue-portal.webp',
-          },
-          {
-            name: 'Blue static portal',
-            position: [128, 564],
-            icon: '/assets/blue-portal.webp',
-          },
-        ],
+        name: 'Cyclops',
+        position: [355, 406],
+        icon: '/assets/Cyclops.webp',
+      },
+    ],
+    elites: [
+      {
+        name: 'Headsman',
+        position: [700, 350],
+        icon: '/assets/Headsman.webp',
       },
       {
-        name: 'V2',
-        url: '/assets/Castle_Closeau_02.png',
-        bosses: [
-          {
-            name: 'Cyclops',
-            position: [124, 443],
-            icon: '/assets/Cyclops.webp',
-          },
-        ],
-        elites: [
-          {
-            name: 'Khazra',
-            position: [231, 665],
-            icon: '/assets/Khazra.webp',
-          },
-        ],
-        portals: [
-          {
-            name: 'Blue static portal',
-            position: [111, 422],
-            icon: '/assets/blue-portal.webp',
-          },
-        ],
+        name: 'Headsman',
+        position: [570, 407],
+        description: 'Spawns in the center of the room opposite the throne',
+        icon: '/assets/Headsman.webp',
+      },
+      {
+        name: 'Headsman',
+        position: [440, 260],
+        description: 'Spawns in room from yard side or in corridor',
+        icon: '/assets/Headsman.webp',
+      },
+      {
+        name: 'Headsman',
+        position: [172, 230],
+        icon: '/assets/Headsman.webp',
+      },
+      {
+        name: 'Headsman',
+        position: [172, 450],
+        icon: '/assets/Headsman.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [815, 290],
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [75, 420],
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [283, 550],
+        description: 'Spawns near the fountain',
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [500, 515],
+        description: 'Possible spawn one of bosses on ruins',
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [767, 520],
+        description: 'Possible boss spawn near a tree in the middle of the yard',
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [510, 175],
+        description: 'Possible to spawn right before players spawn.',
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Werewolf',
+        position: [172, 330],
+        icon: '/assets/Werewolf.webp',
+      },
+      {
+        name: 'Khazra',
+        position: [480, 525],
+        description: 'Possible spawn one of bosses on ruins',
+        icon: '/assets/Khazra.webp',
+      },
+      {
+        name: 'Reaper',
+        position: [785, 290],
+        icon: '/assets/Reaper.webp',
+      },
+    ],
+    portals: [
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [668, 407],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [355, 215],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [235, 268],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [495, 383],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [128, 564],
+        icon: '/assets/blue.webp',
       },
     ],
   },
   {
     name: 'Sinners End',
-    variant: [
+    url: '/assets/Sinners_End_F01_01_N.png',
+    bosses: [],
+    elites: [
       {
-        name: 'V1',
-        url: '/assets/Sinners_End_F01_01_N.png',
-        bosses: [
-          {
-            name: 'Cyclops',
-            position: [406, 355],
-            icon: '/assets/Cyclops.webp',
-          },
-        ],
-        elites: [
-          {
-            name: 'Khazra',
-            position: [768, 256],
-            icon: '/assets/Khazra.webp',
-          },
-        ],
-        portals: [
-          {
-            name: 'Blue static portal',
-            position: [400, 500],
-            icon: '/assets/blue-portal.webp',
-          },
-        ],
+        name: 'Khazra',
+        position: [605, 740],
+        icon: '/assets/Khazra.webp',
+      },
+      {
+        name: 'Khazra',
+        position: [140, 295],
+        icon: '/assets/Khazra.webp',
+      },
+      {
+        name: 'Khazra',
+        position: [452, 293],
+        icon: '/assets/Khazra.webp',
+      },
+      {
+        name: 'Khazra',
+        position: [305, 590],
+        description: 'Possible spawn one of bosses',
+        icon: '/assets/Khazra.webp',
+      },
+      {
+        name: 'Khazra',
+        position: [550, 613],
+        icon: '/assets/Khazra.webp',
+      },
+      {
+        name: 'Reaper',
+        position: [295, 605],
+        description: 'Possible spawn one of bosses',
+        icon: '/assets/Reaper.webp',
+      },
+      {
+        name: 'Reaper',
+        position: [452, 535],
+        icon: '/assets/Reaper.webp',
+      },
+      {
+        name: 'Reaper',
+        position: [317, 790],
+        icon: '/assets/Reaper.webp',
+      },
+      {
+        name: 'Reaper',
+        position: [645, 447],
+        icon: '/assets/Reaper.webp',
+      },
+      {
+        name: 'Reaper',
+        position: [480, 140],
+        icon: '/assets/Reaper.webp',
+      },
+    ],
+    portals: [
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [83, 250],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [828, 255],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [823, 383],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [473, 835],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Blue static portal',
+        type: 'blue',
+        position: [65, 446],
+        icon: '/assets/blue.webp',
+      },
+      {
+        name: 'Red static portal',
+        type: 'red',
+        position: [350, 287],
+        icon: '/assets/red.webp',
+      },
+      {
+        name: 'Red static portal',
+        type: 'red',
+        position: [545, 657],
+        icon: '/assets/red.webp',
       },
     ],
   },
@@ -193,29 +242,22 @@ const initialVisibleLayers = {
   bosses: true,
   elites: true,
   portals: true,
-  bluePortal: true,
-  redPortal: true,
+  blue: true,
+  red: true,
   cyclops: true,
   wendigo: true,
   khazra: true,
   reaper: true,
   werewolf: true,
+  headsman: true,
 };
 
 const Map = () => {
-  const [activeMap, setActiveMap] = useState(mapData[0]);
-  const [activeLocation, setActiveLocation] = useState(mapData[0].variant[0]);
+  const [activeMap, setActiveMap] = useState(mapData[1]);
   const [visibleLayers, setVisibleLayers] = useState(initialVisibleLayers);
 
   const handleMapChange = (newMap) => {
-    if (newMap !== activeMap) {
-      setActiveMap(newMap);
-      setActiveLocation(newMap.variant[0]);
-    }
-  };
-
-  const handleLocationChange = (newLocation) => {
-    setActiveLocation(newLocation);
+    setActiveMap(newMap);
   };
 
   const toggleLayerVisibility = (layer) => {
@@ -232,11 +274,12 @@ const Map = () => {
         newState.khazra = newEliteState;
         newState.reaper = newEliteState;
         newState.werewolf = newEliteState;
+        newState.headsman = newEliteState;
       } else if (layer === 'portals') {
         const newPortalState = !prev.portals;
         newState.portals = newPortalState;
-        newState.bluePortal = newPortalState;
-        newState.redPortal = newPortalState;
+        newState.blue = newPortalState;
+        newState.red = newPortalState;
       } else {
         newState[layer] = !prev[layer];
       }
@@ -246,7 +289,7 @@ const Map = () => {
 
   useEffect(() => {
     setVisibleLayers({ ...initialVisibleLayers });
-  }, [activeLocation.url]);
+  }, [activeMap.url]);
 
   return (
     <>
@@ -263,20 +306,6 @@ const Map = () => {
                     </button>
                   ))}
                 </div>
-                <div className="flex space-x-3">
-                  {activeMap === mapData[0] &&
-                    mapData[0].variant.map((location) => (
-                      <button key={location.name} onClick={() => handleLocationChange(location)} className={`text-center w-fit p-3 hover:bg-neutral-50 hover:bg-opacity-10 duration-150 ease-in-out ${activeLocation === location ? 'bg-neutral-50 bg-opacity-10 border-b-2 border-b-[#f2c46d]' : 'border-b-2 border-b-transparent'}`}>
-                        <span>{location.name}</span>
-                      </button>
-                    ))}
-                  {activeMap === mapData[1] &&
-                    mapData[1].variant.map((location) => (
-                      <button key={location.name} onClick={() => handleLocationChange(location)} className={`text-center w-fit p-3 hover:bg-neutral-50 hover:bg-opacity-10 duration-150 ease-in-out ${activeLocation === location ? 'bg-neutral-50 bg-opacity-10 border-b-2 border-b-[#f2c46d]' : 'border-b-2 border-b-transparent'}`}>
-                        <span>{location.name}</span>
-                      </button>
-                    ))}
-                </div>
               </div>
             </div>
             {/* резделитель */}
@@ -290,42 +319,72 @@ const Map = () => {
                   </label>
                 </div>
                 {['cyclops', 'wendigo'].map((boss) => (
-                  <div key={boss} className="flex items-center space-x-1">
-                    <div>
-                      <img src={`/assets/${boss}.webp`} width={32} height={32} alt="cyclops" />
-                    </div>
-                    <div>
-                      <input type="checkbox" hidden id={boss} checked={!visibleLayers[boss]} onChange={() => toggleLayerVisibility(boss)} className="peer" />
-                      <label htmlFor={boss} className="capitalize cursor-pointer text-neutral-50 select-none peer-checked:line-through peer-checked:text-neutral-500">
-                        {boss}
-                      </label>
-                    </div>
+                  <div key={boss}>
+                    <input type="checkbox" hidden id={boss} checked={!visibleLayers[boss]} onChange={() => toggleLayerVisibility(boss)} className="peer" />
+                    <label htmlFor={boss} className="capitalize flex items-center space-x-1 cursor-pointer text-neutral-50 select-none peer-checked:line-through peer-checked:text-neutral-500">
+                      <div>
+                        <img src={`/assets/${boss}.webp`} width={32} height={32} alt="cyclops" />
+                      </div>
+                      <p>{boss}</p>
+                    </label>
                   </div>
                 ))}
               </div>
             ))}
             <div className="h-px w-full bg-neutral-800"></div>
             {['elites'].map((layer) => (
-              <div key={layer} className="flex space-x-3 p-4">
-                <input type="checkbox" hidden id={layer} checked={!visibleLayers[layer]} onChange={() => toggleLayerVisibility(layer)} className="peer" />
-                <label htmlFor={layer} className="capitalize cursor-pointer text-[#d5a860] select-none peer-checked:line-through peer-checked:text-neutral-500">
-                  {layer}
-                </label>
+              <div key={layer} className="flex flex-col space-y-3 p-4">
+                <div className="flex">
+                  <input type="checkbox" hidden id={layer} checked={!visibleLayers[layer]} onChange={() => toggleLayerVisibility(layer)} className="peer" />
+                  <label htmlFor={layer} className="capitalize cursor-pointer text-[#d5a860] select-none peer-checked:line-through peer-checked:text-neutral-500">
+                    {layer}
+                  </label>
+                </div>
+                {['khazra', 'reaper', 'headsman', 'werewolf'].map((elite) => (
+                  <div key={elite}>
+                    <div>
+                      <input type="checkbox" hidden id={elite} checked={!visibleLayers[elite]} onChange={() => toggleLayerVisibility(elite)} className="peer" />
+                      <label htmlFor={elite} className="capitalize flex items-center space-x-1 cursor-pointer text-neutral-50 select-none peer-checked:line-through peer-checked:text-neutral-500">
+                        <div>
+                          <img src={`/assets/${elite}.webp`} width={32} height={32} alt="elite" />
+                        </div>
+                        <p>{elite}</p>
+                      </label>
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
             {['portals'].map((layer) => (
-              <div key={layer} className="flex space-x-3 p-4">
-                <input type="checkbox" hidden id={layer} checked={!visibleLayers[layer]} onChange={() => toggleLayerVisibility(layer)} className="peer" />
-                <label htmlFor={layer} className="capitalize cursor-pointer text-[#d5a860] select-none peer-checked:line-through peer-checked:text-neutral-500">
-                  {layer}
-                </label>
+              <div key={layer} className="flex flex-col space-y-3 p-4">
+                <div className="flex">
+                  <input type="checkbox" hidden id={layer} checked={!visibleLayers[layer]} onChange={() => toggleLayerVisibility(layer)} className="peer" />
+                  <label htmlFor={layer} className="capitalize cursor-pointer text-[#d5a860] select-none peer-checked:line-through peer-checked:text-neutral-500">
+                    {layer}
+                  </label>
+                </div>
+                {['blue', 'red'].map((portal) => (
+                  <div key={portal} className="flex items-center space-x-1">
+                    <div>
+                      <input type="checkbox" hidden id={portal} checked={!visibleLayers[portal]} onChange={() => toggleLayerVisibility(portal)} className="peer" />
+                      <label htmlFor={portal} className="cursor-pointer flex items-center space-x-3 text-neutral-50 select-none peer-checked:line-through peer-checked:text-neutral-500">
+                        <div>
+                          <img src={`/assets/${portal}.webp`} width={32} height={32} alt="portal" />
+                        </div>
+                        <p>
+                          <span className="capitalize">{portal}</span> static portal
+                        </p>
+                      </label>
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
         </div>
       </div>
       <Suspense fallback={<div>Loading map...</div>}>
-        <DynamicMap activeLocation={activeLocation} visibleLayers={visibleLayers} />
+        <DynamicMap activeMap={activeMap} visibleLayers={visibleLayers} />
       </Suspense>
     </>
   );
