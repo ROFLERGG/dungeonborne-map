@@ -331,7 +331,7 @@ const Map = () => {
                     <input type="checkbox" hidden id={boss} checked={!visibleLayers[boss]} onChange={() => toggleLayerVisibility(boss)} className="peer" />
                     <label htmlFor={boss} className="capitalize flex items-center space-x-1 cursor-pointer text-neutral-50 select-none peer-checked:line-through peer-checked:text-neutral-500">
                       <div>
-                        <img src={`/assets/${boss}.webp`} width={32} height={32} alt="cyclops" />
+                        <img src={`/assets/${boss}.webp`} width={32} height={32} alt={boss} />
                       </div>
                       <p>{boss}</p>
                     </label>
