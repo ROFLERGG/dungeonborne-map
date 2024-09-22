@@ -255,9 +255,14 @@ const initialVisibleLayers = {
 const Map = () => {
   const [activeMap, setActiveMap] = useState(mapData[0]);
   const [visibleLayers, setVisibleLayers] = useState(initialVisibleLayers);
+  const [menuIsOpen, setMenuIsOpen] = useState(true);
 
   const handleMapChange = (newMap) => {
     setActiveMap(newMap);
+  };
+
+  const handleMenuToggle = () => {
+    setMenuIsOpen(!menuIsOpen);
   };
 
   const toggleLayerVisibility = (layer) => {
@@ -293,8 +298,12 @@ const Map = () => {
 
   return (
     <>
-      <div className="max-w-[400px] absolute z-20 right-0 h-full flex flex-col bg-neutral-900 text-neutral-50">
+      <div className={`max-w-[400px] absolute z-20 right-0 h-full flex flex-col bg-neutral-900 text-neutral-50 duration-300 ease-in-out ${!menuIsOpen ? 'translate-x-full' : ''}`}>
         <div className="flex flex-col space-y-6">
+          <button onClick={handleMenuToggle} className={`hidden w-fit p-4 bg-neutral-900 max-[440px]:block ${!menuIsOpen ? '-translate-x-full' : ''}`}>
+            {menuIsOpen && <span>{'>'}</span>}
+            {!menuIsOpen && <span>{'<'}</span>}
+          </button>
           <p className={`${montserrat.className} text-neutral-400 p-4`}>Interactive map for Dungeonborne was created by gamer for gamers</p>
           <div className="flex flex-col">
             <div className="flex flex-col space-y-3 p-4">
@@ -382,6 +391,10 @@ const Map = () => {
             ))}
           </div>
         </div>
+        <button onClick={handleMenuToggle} className="absolute right-full p-4 bg-neutral-900 max-[440px]:hidden">
+          {menuIsOpen && <span>{'>'}</span>}
+          {!menuIsOpen && <span>{'<'}</span>}
+        </button>
       </div>
       <Suspense fallback={<div>Loading map...</div>}>
         <DynamicMap activeMap={activeMap} visibleLayers={visibleLayers} />
