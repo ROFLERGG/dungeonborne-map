@@ -268,26 +268,25 @@ const Map = () => {
   const toggleLayerVisibility = (layer) => {
     setVisibleLayers((prev) => {
       const newState = { ...prev };
-      if (layer === 'bosses') {
-        const newBossState = !prev.bosses;
-        newState.bosses = newBossState;
-        newState.cyclops = newBossState;
-        newState.wendigo = newBossState;
-      } else if (layer === 'elites') {
-        const newEliteState = !prev.elites;
-        newState.elites = newEliteState;
-        newState.khazra = newEliteState;
-        newState.reaper = newEliteState;
-        newState.werewolf = newEliteState;
-        newState.headsman = newEliteState;
-      } else if (layer === 'portals') {
-        const newPortalState = !prev.portals;
-        newState.portals = newPortalState;
-        newState.blue = newPortalState;
-        newState.red = newPortalState;
+      const groups = {
+        bosses: ['cyclops', 'wendigo'],
+        elites: ['khazra', 'reaper', 'werewolf', 'headsman'],
+        portals: ['blue', 'red'],
+      };
+
+      if (groups[layer]) {
+        const newGroupState = !prev[layer];
+        newState[layer] = newGroupState;
+        groups[layer].forEach((item) => (newState[item] = newGroupState));
       } else {
         newState[layer] = !prev[layer];
+        Object.entries(groups).forEach(([group, items]) => {
+          if (items.includes(layer)) {
+            newState[group] = items.some((item) => newState[item]);
+          }
+        });
       }
+
       return newState;
     });
   };
