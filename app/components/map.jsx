@@ -298,7 +298,7 @@ const Map = () => {
 
   return (
     <>
-      <div className={`max-w-[400px] absolute z-20 right-0 h-full flex flex-col bg-neutral-900 text-neutral-50 duration-300 ease-in-out ${!menuIsOpen ? 'translate-x-full' : ''}`}>
+      <div className={`max-w-[400px] absolute z-20 right-0 min-h-full flex flex-col bg-neutral-900 text-neutral-50 duration-300 ease-in-out ${!menuIsOpen ? 'translate-x-full' : ''}`}>
         <div className="flex flex-col space-y-6">
           <button onClick={handleMenuToggle} className={`hidden w-fit p-4 bg-neutral-900 max-[440px]:block ${!menuIsOpen ? '-translate-x-full' : ''}`}>
             {menuIsOpen && <span>{'>'}</span>}
