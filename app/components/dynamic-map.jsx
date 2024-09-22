@@ -34,7 +34,7 @@ const Map = ({ activeMap, visibleLayers }) => {
   ];
 
   return (
-    <MapContainer center={[450, 450]} zoom={0} minZoom={0} maxZoom={2} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.Simple} className="w-screen h-screen z-10 !bg-neutral-800">
+    <MapContainer center={[450, 450]} zoom={0} minZoom={0} maxZoom={2} zoomControl={false} scrollWheelZoom={true} crs={L.CRS.Simple} className="min-w-screen min-h-screen z-10 !bg-neutral-800">
       <ImageOverlay url={activeMap.url} bounds={bounds} />
       {visibleLayers.bosses && activeMap.bosses?.filter((boss) => boss.icon)?.map((boss, i) => visibleLayers[boss.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={boss.position} icon={createIcon(boss.icon, [48, 48])} name={boss.name} description={boss.description} />)}
       {visibleLayers.elites && activeMap.elites?.filter((elite) => elite.icon)?.map((elite, i) => visibleLayers[elite.name.toLowerCase()] && <MarkerWithHoverPopup key={i} position={elite.position} icon={createIcon(elite.icon, [48, 48])} name={elite.name} description={elite.description} />)}

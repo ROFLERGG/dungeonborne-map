@@ -298,11 +298,10 @@ const Map = () => {
 
   return (
     <>
-      <div className={`max-w-[400px] absolute z-20 right-0 min-h-full flex flex-col bg-neutral-900 text-neutral-50 duration-300 ease-in-out ${!menuIsOpen ? 'translate-x-full' : ''}`}>
+      <div className={`max-w-[400px] absolute z-20 right-0 min-h-dvh flex flex-col bg-neutral-900 text-neutral-50 duration-300 ease-in-out ${!menuIsOpen ? 'translate-x-full' : ''}`}>
         <div className="flex flex-col space-y-6">
-          <button onClick={handleMenuToggle} className={`hidden w-fit p-4 bg-neutral-900 max-[440px]:block duration-300 ease-in-out ${!menuIsOpen ? '-translate-x-full' : ''}`}>
-            {menuIsOpen && <span>{'>'}</span>}
-            {!menuIsOpen && <span>{'<'}</span>}
+          <button onClick={handleMenuToggle} className={`hidden w-fit p-4 bg-neutral-900 max-[440px]:block duration-300 ease-in-out text-2xl ${!menuIsOpen ? '-translate-x-full' : ''}`}>
+            {menuIsOpen ? '>' : '<'}
           </button>
           <p className={`${montserrat.className} text-neutral-400 p-4`}>Interactive map for Dungeonborne was created by gamer for gamers</p>
           <div className="flex flex-col">
@@ -392,8 +391,7 @@ const Map = () => {
           </div>
         </div>
         <button onClick={handleMenuToggle} className="absolute right-full p-4 bg-neutral-900 max-[440px]:hidden">
-          {menuIsOpen && <span>{'>'}</span>}
-          {!menuIsOpen && <span>{'<'}</span>}
+          {menuIsOpen ? '>' : '<'}
         </button>
       </div>
       <Suspense fallback={<div>Loading map...</div>}>
